@@ -77,16 +77,66 @@
 </head>
 <body class="bg-[#f5f4fa] font-sans text-text">
     <!-- 導覽列 -->
-    <nav class="bg-primary shadow-md shadow-primary/10 py-4 px-8">
-        <div class="max-w-7xl mx-auto">
-            <ul class="flex flex-col md:flex-row items-center justify-around max-w-lg mx-auto space-y-3 md:space-y-0">
-                <li><a href="#" class="text-white font-medium px-4 py-2 relative hover:bg-transparent after:absolute after:w-0 after:h-px after:bg-white after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:transition-all after:duration-300 hover:after:w-2/3">首頁</a></li>
-                <li><a href="#" class="text-white font-medium px-4 py-2 relative hover:bg-transparent after:absolute after:w-0 after:h-px after:bg-white after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:transition-all after:duration-300 hover:after:w-2/3">關於我們</a></li>
-                <li><a href="#" class="text-white font-medium px-4 py-2 relative hover:bg-transparent after:absolute after:w-0 after:h-px after:bg-white after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:transition-all after:duration-300 hover:after:w-2/3">服務</a></li>
-                <li><a href="#" class="text-white font-medium px-4 py-2 relative hover:bg-transparent after:absolute after:w-0 after:h-px after:bg-white after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:transition-all after:duration-300 hover:after:w-2/3">聯絡</a></li>
-            </ul>
+    <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-lg z-50 transition-all duration-300" id="main-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo 區域 -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="flex items-center">
+                        <span class="text-primary text-3xl mr-2"><i class="fas fa-infinity"></i></span>
+                        <span class="font-serif font-bold text-xl text-primary">未來永生<span class="text-accent">系統</span></span>
+                    </a>
+                </div>
+                
+                <!-- 桌面選單 -->
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="#" class="text-text px-3 py-2 rounded-md text-sm font-medium relative group">
+                        首頁
+                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                    </a>
+                    <a href="#" class="text-text px-3 py-2 rounded-md text-sm font-medium relative group">
+                        關於我們
+                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                    </a>
+                    <a href="#" class="text-text px-3 py-2 rounded-md text-sm font-medium relative group">
+                        服務
+                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                    </a>
+                    <a href="#" class="text-text px-3 py-2 rounded-md text-sm font-medium relative group">
+                        聯絡
+                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                    </a>
+                    <a href="#upload-section" class="ml-4 btn btn-primary text-sm py-2 px-5">
+                        <i class="fas fa-arrow-up-from-bracket mr-1"></i> 立即體驗
+                    </a>
+                </div>
+                
+                <!-- 手機選單按鈕 -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-primary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary rounded-md p-2">
+                        <span class="sr-only">開啟選單</span>
+                        <i class="fas fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 手機選單內容 -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-sm border-t border-gray-100">
+                <a href="#" class="block px-3 py-3 rounded-md text-base font-medium text-text hover:bg-accent/10 hover:text-primary">首頁</a>
+                <a href="#" class="block px-3 py-3 rounded-md text-base font-medium text-text hover:bg-accent/10 hover:text-primary">關於我們</a>
+                <a href="#" class="block px-3 py-3 rounded-md text-base font-medium text-text hover:bg-accent/10 hover:text-primary">服務</a>
+                <a href="#" class="block px-3 py-3 rounded-md text-base font-medium text-text hover:bg-accent/10 hover:text-primary">聯絡</a>
+                <a href="#upload-section" class="block px-3 py-3 rounded-md text-base font-medium bg-accent/10 text-primary">
+                    <i class="fas fa-arrow-up-from-bracket mr-1"></i> 立即體驗
+                </a>
+            </div>
         </div>
     </nav>
+
+    <!-- 為了確保固定導覽列不會覆蓋內容，添加頂部間距 -->
+    <div class="h-20"></div>
     
     <!-- 橫幅區域 -->
     <header class="relative bg-cover bg-center h-[50vh] md:min-h-[50vh] flex flex-col justify-center items-center text-center px-4 py-8" style="background-image: url('assets/warm-background.jpg')">
@@ -278,5 +328,50 @@
     </footer>
     
     <script src="js/upload.js"></script>
+    <!-- 添加導覽列控制腳本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 控制移動裝置選單
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                if (mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.remove('hidden');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+            
+            // 導覽列滾動效果
+            const nav = document.getElementById('main-nav');
+            let lastScrollTop = 0;
+            
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > 100) {
+                    nav.classList.add('shadow-md');
+                    nav.classList.remove('py-4');
+                } else {
+                    nav.classList.remove('shadow-md');
+                }
+                
+                if (scrollTop > 200) {
+                    if (scrollTop > lastScrollTop) {
+                        // 向下滾動
+                        nav.style.transform = 'translateY(-100%)';
+                    } else {
+                        // 向上滾動
+                        nav.style.transform = 'translateY(0)';
+                    }
+                } else {
+                    nav.style.transform = 'translateY(0)';
+                }
+                
+                lastScrollTop = scrollTop;
+            });
+        });
+    </script>
 </body>
 </html>

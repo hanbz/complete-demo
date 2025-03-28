@@ -1,0 +1,67 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Taiwan-specific UI/UX design rules
+
+- Create clean and intuitive interfaces with a focus on minimalism, which tends to resonate well with Taiwanese users.
+- Prioritize a mobile-first design approach as smartphone usage is prevalent in Taiwan.
+- Use bright and pastel color schemes which are often preferred in Taiwanese design aesthetics.
+- Implement responsive design techniques to ensure compatibility across different devices and screen sizes.
+- Leverage visual elements and icons that are culturally relevant and easy to interpret for Taiwanese users.
+- Enhance navigation by using both English and Traditional Chinese for better accessibility and reach.
+- Offer clear and concise UI elements that minimize cognitive load, using whitespace effectively.
+- Optimize for fast loading speeds, which are crucial for retaining user attention on mobile devices.
+- Follow local data protection regulations to ensure user privacy and trust.
+
+1. Color Style
+Utilize bright and warm color tones, such as blue (trustworthy), red (passionate), green (natural), and gold (premium feel).​
+
+Avoid overly flashy or oversaturated color combinations; Taiwanese users prefer fresh, soft, and minimalist styles.​
+
+Refer to common Taiwanese brand color schemes, such as E.SUN Bank (green), PChome (blue and red), 7-Eleven (orange and green).​
+
+2. Layout
+Center-align main content sections to ensure visual balance, avoiding excessive left or right alignment.​
+
+Use Chinese font sizes between 12 to 16px to maintain readability. Headlines can be set between 18px to 24px, with bolding to highlight key points.​
+
+Employ ample white space to prevent information from appearing too cluttered, ensuring visual clarity.​
+
+Prioritize mobile-first design to guarantee a positive experience for mobile users.​
+
+3. Typography
+Use fonts familiar to Taiwanese users, such as Noto Sans TC, Source Han Sans, Microsoft JhengHei, to ensure readability.​
+
+Avoid obscure or overly artistic fonts, as they can diminish trust and readability.​
+
+Maintain line spacing around 1.5 times to enhance readability and comfort.​
+Cursor Rules
+
+4. Buttons & Interaction
+Buttons should provide clear click feedback effects (e.g., color change, shadow, gradient) to enhance interactive experience.​
+
+Primary buttons are recommended to have rounded corners (border-radius: 8px to 12px) to avoid a rigid appearance.​
+
+Call-to-Action (CTA) buttons should emphasize color contrast (e.g., red background with white text, blue background with white text) to attract clicks.​
+
+Form input fields should clearly distinguish states (focus, error, success) to improve usability.​
+
+5. Taiwanese User Preferences
+Provide social login options such as "Facebook, LINE, Google", as these are commonly used by Taiwanese users.​
+
+Shopping carts should display "FamilyMart, 7-Eleven pickup and payment" options, as these are popular logistics and payment methods in Taiwan.​
+
+The website should offer a "Traditional Chinese" language switch to cater to the Taiwanese market.​
+
+Implement a night mode (Dark Mode) option, considering that Taiwanese users often browse on mobile devices for extended periods; night mode can reduce eye strain.​
+
+6. SEO & Performance Optimization
+Ensure the website achieves a "Google PageSpeed Insights" score above 85 to guarantee fast loading speeds.​
+
+Use WebP format for images to enhance loading speed, avoiding overly large PNG or JPG files.​
+
+Include keywords such as "Taiwan, local, official, discount" in website titles and descriptions to improve SEO performance.​
+
+Support OpenGraph (OG) tags to ensure correct preview images and descriptions when shared on social media.  
