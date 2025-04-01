@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>未來告別式&數位永生系統</title>
+    <title>數位永生系統 | 登入</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/shadow-text.css">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#6457a6',
-                        secondary: '#f8f7fc',
-                        accent: '#5fc3e4',
-                        text: '#36304a',
-                        highlight: '#2de2ff'
+                        admin: {
+                            primary: '#2c3e50',
+                            secondary: '#34495e',
+                            accent: '#3498db',
+                            success: '#2ecc71',
+                            warning: '#f39c12',
+                            danger: '#e74c3c',
+                            info: '#3498db',
+                            light: '#ecf0f1',
+                            dark: '#2c3e50',
+                            sidebar: '#1e293b',
+                            content: '#f8fafc'
+                        }
                     },
                     fontFamily: {
                         sans: ['Noto Sans TC', '微軟正黑體', 'PingFang TC', '蘋方-繁', 'sans-serif'],
@@ -29,347 +36,227 @@
     <style type="text/tailwindcss">
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@300;400;500;700&display=swap');
         
-        @layer components {
-            .btn {
-                @apply px-7 py-3 rounded transition-all duration-300 overflow-hidden relative font-normal tracking-wide inline-block;
-            }
-            .btn-primary {
-                @apply bg-accent text-white shadow-lg shadow-accent/25 hover:bg-[#4ab6d9] hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/30;
-            }
-            .btn-secondary {
-                @apply bg-transparent text-white border border-white/60 hover:bg-white/10 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/10 hover:border-white;
-            }
-            .icon-circle {
-                @apply flex items-center justify-center w-20 h-20 text-2xl bg-white/20 rounded-full border border-white/30 text-white transition-all duration-300 relative overflow-hidden shadow-lg shadow-accent/20 hover:scale-110 hover:bg-white/30 cursor-pointer;
-            }
-            .section-card {
-                @apply bg-secondary mb-12 p-10 rounded-lg shadow-lg shadow-primary/10 border border-primary/10 relative;
-            }
-            .demo-card {
-                @apply bg-white p-8 rounded-lg shadow-lg shadow-primary/10 transition-all duration-300 relative overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/15;
-            }
+        .login-btn {
+            @apply px-6 py-3 rounded-md bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium tracking-wide focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 hover:-translate-y-0.5 w-full;
         }
         
-        .gradient-bg {
-            @apply bg-gradient-to-r from-[#564796] to-[#7b6db5];
+        .input-field {
+            @apply bg-gray-800/50 border border-gray-700 text-gray-100 rounded-md px-4 py-3 w-full placeholder-gray-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300;
         }
         
-        .pulse-animation {
-            animation: pulse 2s infinite;
+        .input-label {
+            @apply block text-sm font-medium text-gray-300 mb-1.5;
         }
         
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 4px 12px rgba(95, 195, 228, 0.25); }
-            50% { transform: scale(1.03); box-shadow: 0 6px 18px rgba(95, 195, 228, 0.35); }
-            100% { transform: scale(1); box-shadow: 0 4px 12px rgba(95, 195, 228, 0.25); }
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
         }
         
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+        .floating-element-alt {
+            animation: float 8s ease-in-out infinite;
+            animation-delay: 2s;
         }
         
-        .bounce-animation {
-            animation: bounce 2s infinite;
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
+        .glow {
+            animation: glow 4s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 10px -10px rgba(72, 118, 255, 0.6); }
+            to { box-shadow: 0 0 20px 10px rgba(72, 118, 255, 0.6); }
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(to right, #3498db, #8e44ad);
+            animation: particle-animation 12s infinite ease-in-out;
+            opacity: 0.2;
+        }
+        
+        @keyframes particle-animation {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            20% { opacity: 0.6; }
+            80% { opacity: 0.4; }
+            100% { transform: translateY(-700px) translateX(200px); opacity: 0; }
+        }
+        
+        /* 背景網格 */
+        .grid-bg {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        }
+        
+        /* 打字機效果 */
+        .typewriter h1 {
+            overflow: hidden;
+            border-right: 0.15em solid #3498db;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: 
+                typing 3.5s steps(30, end),
+                blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #3498db }
         }
     </style>
 </head>
-<body class="bg-[#f5f4fa] font-sans text-text">
-    <!-- 導覽列 -->
-    <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-lg z-50 transition-all duration-300" id="main-nav">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo 區域 -->
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="#" class="flex items-center">
-                        <span class="text-primary text-3xl mr-2"><i class="fas fa-infinity"></i></span>
-                        <span class="font-serif font-bold text-xl text-primary">未來永生<span class="text-accent">系統</span></span>
-                    </a>
-                </div>
-                
-                <!-- 桌面選單 -->
-                <div class="hidden md:flex items-center space-x-1">
-                    <a href="#" class="text-text px-3 py-2 rounded-md text-sm font-medium relative group">
-                        首頁
-                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-                    </a>
-                    <a href="#" class="text-text px-3 py-2 rounded-md text-sm font-medium relative group">
-                        關於我們
-                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-                    </a>
-                    <a href="#" class="text-text px-3 py-2 rounded-md text-sm font-medium relative group">
-                        服務
-                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-                    </a>
-                    <a href="#" class="text-text px-3 py-2 rounded-md text-sm font-medium relative group">
-                        聯絡
-                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-                    </a>
-                    <a href="#upload-section" class="ml-4 btn btn-primary text-sm py-2 px-5">
-                        <i class="fas fa-arrow-up-from-bracket mr-1"></i> 立即體驗
-                    </a>
-                </div>
-                
-                <!-- 手機選單按鈕 -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-button" class="text-gray-500 hover:text-primary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary rounded-md p-2">
-                        <span class="sr-only">開啟選單</span>
-                        <i class="fas fa-bars text-lg"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 手機選單內容 -->
-        <div id="mobile-menu" class="hidden md:hidden">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-sm border-t border-gray-100">
-                <a href="#" class="block px-3 py-3 rounded-md text-base font-medium text-text hover:bg-accent/10 hover:text-primary">首頁</a>
-                <a href="#" class="block px-3 py-3 rounded-md text-base font-medium text-text hover:bg-accent/10 hover:text-primary">關於我們</a>
-                <a href="#" class="block px-3 py-3 rounded-md text-base font-medium text-text hover:bg-accent/10 hover:text-primary">服務</a>
-                <a href="#" class="block px-3 py-3 rounded-md text-base font-medium text-text hover:bg-accent/10 hover:text-primary">聯絡</a>
-                <a href="#upload-section" class="block px-3 py-3 rounded-md text-base font-medium bg-accent/10 text-primary">
-                    <i class="fas fa-arrow-up-from-bracket mr-1"></i> 立即體驗
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- 為了確保固定導覽列不會覆蓋內容，添加頂部間距 -->
-    <div class="h-20"></div>
+<body class="bg-gray-900 text-white font-sans min-h-screen overflow-hidden relative grid-bg">
+    <!-- 粒子背景 -->
+    <div id="particles" class="absolute inset-0 z-0 overflow-hidden"></div>
     
-    <!-- 橫幅區域 -->
-    <header class="relative bg-cover bg-center h-[50vh] md:min-h-[50vh] flex flex-col justify-center items-center text-center px-4 py-8" style="background-image: url('assets/warm-background.jpg')">
-        <div class="absolute inset-0 bg-primary/70"></div>
-        <div class="relative z-10 max-w-3xl">
-            <h1 class="text-4xl md:text-5xl font-serif mb-4 text-white font-semibold shadow-text">未來告別式&數位永生系統</h1>
-            <p class="text-xl md:text-2xl text-white font-medium tracking-wide shadow-text">透過AI科技，讓珍貴的回憶永存</p>
-        </div>
-    </header>
+    <!-- 背景圖形元素 -->
+    <div class="absolute top-[15%] left-[15%] w-32 h-32 rounded-full bg-gradient-to-r from-blue-500/20 to-indigo-500/20 blur-xl floating-element"></div>
+    <div class="absolute top-[10%] right-[10%] w-40 h-40 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-xl floating-element-alt"></div>
+    <div class="absolute bottom-[15%] left-[25%] w-36 h-36 rounded-full bg-gradient-to-r from-green-500/20 to-teal-500/20 blur-xl floating-element"></div>
+    <div class="absolute bottom-[20%] right-[25%] w-24 h-24 rounded-full bg-gradient-to-r from-orange-500/20 to-yellow-500/20 blur-xl floating-element-alt"></div>
     
-    <main class="max-w-7xl mx-auto px-4 py-8 relative">
-        <!-- 標題區塊 -->
-        <section class="gradient-bg text-center mb-12 py-14 px-8 rounded-lg shadow-xl shadow-primary/15 overflow-hidden relative">
-            <div class="relative z-10">
-                <div class="flex justify-center space-x-4 md:space-x-8 mb-6">
-                    <div class="icon-circle"><i class="fas fa-heart"></i></div>
-                    <div class="icon-circle"><i class="fas fa-memory"></i></div>
-                    <div class="icon-circle"><i class="fas fa-microphone"></i></div>
+    <!-- 頂部裝飾 -->
+    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
+    
+    <!-- 登入卡片 -->
+    <div class="container mx-auto px-4 h-screen flex items-center justify-center z-10 relative">
+        <div class="w-full max-w-md">
+            <!-- 標誌和標題 -->
+            <div class="text-center mb-8">
+                <div class="inline-block p-4 rounded-full bg-gradient-to-br from-blue-500/10 to-indigo-600/10 border border-gray-700/50 shadow-lg mb-4 glow">
+                    <i class="fas fa-infinity text-4xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500"></i>
                 </div>
-                <h2 class="text-4xl md:text-5xl font-serif mb-4 text-highlight font-bold">迎接數位時代的永恆陪伴</h2>
-                <div class="h-0.5 w-16 bg-accent mx-auto mb-6 relative">
-                    <span class="absolute -top-0.5 left-0 w-1 h-1 rounded-full bg-[#8ee0f5]"></span>
-                    <span class="absolute -top-0.5 right-0 w-1 h-1 rounded-full bg-[#8ee0f5]"></span>
+                <div class="typewriter">
+                    <h1 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 inline-block">數位永生系統</h1>
                 </div>
-                <p class="text-xl max-w-3xl mx-auto leading-relaxed font-medium text-white shadow-sm">透過先進AI技術，我們讓摯愛親人的聲音、影像和記憶永存，為您帶來無盡的情感慰藉與連結</p>
-                <div class="flex flex-col md:flex-row justify-center gap-4 md:gap-6 mt-8">
-                    <a href="#upload-section" class="btn btn-primary pulse-animation">開始體驗</a>
-                    <a href="#" class="btn btn-secondary">了解更多</a>
-                </div>
-                <div class="flex flex-col items-center mt-8 opacity-80 text-sm">
-                    <span class="text-white">向下滑動探索更多</span>
-                    <div class="text-2xl text-white mt-2 bounce-animation">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- 簡介段落 -->
-        <section class="section-card">
-            <h2 class="text-3xl font-serif mb-6 text-[#5349a0] inline-block pb-2 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-accent/60">永續的情感連結</h2>
-            <p class="leading-relaxed">我們的數位永生系統運用最先進的人工智能技術，通過深度學習演算法分析您所提供的照片、影片和聲音記錄，精確還原您摯愛的形象與聲音。這不僅是一種記憶的方式，更是情感的延續，讓您即使在失去至親後，仍能感受到他們的存在，聽到熟悉的聲音，看到熟悉的笑容，帶給您源源不絕的溫暖與慰藉。</p>
-        </section>
-        
-        <!-- 上傳區域 -->
-        <section id="upload-section" class="section-card">
-            <h2 class="text-3xl font-serif mb-6 text-[#5349a0] inline-block pb-2 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-accent/60">上傳您親人的影片</h2>
-            <p class="mb-8 leading-relaxed">透過上傳您親人的影片，我們的AI技術將能重現他們的形象與聲音，為您創造一段專屬的問候。</p>
-            
-            <div class="bg-white p-8 rounded-lg shadow-lg relative">
-                <div id="upload-container" class="border-2 border-dashed border-primary/30 rounded-lg p-10 text-center cursor-pointer hover:border-primary/50 transition-colors">
-                    <i class="fas fa-cloud-upload-alt text-6xl text-primary/40 mb-4"></i>
-                    <h3 class="text-xl font-medium mb-2">拖放您的影片文件或點擊上傳</h3>
-                    <p class="text-gray-500 mb-4">支援格式：MP4, MOV, AVI (最大 500MB)</p>
-                    <button id="upload-btn" class="btn btn-primary">選擇文件</button>
-                    <input type="file" id="file-input" class="hidden" accept="video/*">
-                </div>
-                
-                <div id="upload-progress" class="mt-6 hidden">
-                    <div class="flex justify-between mb-2">
-                        <span class="font-medium">上傳進度</span>
-                        <span id="progress-percent">0%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2.5">
-                        <div id="progress-bar" class="bg-accent h-2.5 rounded-full w-0 transition-all duration-300"></div>
-                    </div>
-                </div>
-                
-                <div id="processing-status" class="mt-6 hidden">
-                    <div class="flex items-center justify-center space-x-4">
-                        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-accent"></div>
-                        <p class="text-lg">AI正在處理您的影片，請稍候...</p>
-                    </div>
-                    <p class="text-center text-gray-500 mt-2">這可能需要幾分鐘時間</p>
-                </div>
+                <p class="text-gray-400 mt-2">登入管理後台</p>
             </div>
             
-            <div id="result-container" class="mt-8 hidden">
-                <h3 class="text-2xl font-serif mb-4 text-[#5349a0]">生成結果</h3>
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <div class="aspect-video bg-black rounded-lg overflow-hidden">
-                        <video id="result-video" class="w-full h-full" controls></video>
+            <!-- 登入表單 -->
+            <div class="bg-gray-800/60 backdrop-blur-xl rounded-xl border border-gray-700/50 p-8 shadow-2xl">
+                <form id="loginForm">
+                    <div class="mb-5">
+                        <label for="username" class="input-label">
+                            <i class="fas fa-user text-blue-500 mr-2"></i>帳號
+                        </label>
+                        <input type="text" id="username" name="username" class="input-field" placeholder="請輸入您的帳號" required>
                     </div>
-                    <div class="mt-4 text-center">
-                        <p class="text-lg mb-4">您的親人為您帶來了特別的問候</p>
-                        <div class="flex justify-center space-x-4">
-                            <button id="download-btn" class="btn btn-primary">
-                                <i class="fas fa-download mr-2"></i> 下載影片
-                            </button>
-                            <button id="share-btn" class="btn btn-secondary border-primary/50 text-primary">
-                                <i class="fas fa-share-alt mr-2"></i> 分享
+                    
+                    <div class="mb-6">
+                        <label for="password" class="input-label">
+                            <i class="fas fa-lock text-blue-500 mr-2"></i>密碼
+                        </label>
+                        <div class="relative">
+                            <input type="password" id="password" name="password" class="input-field pr-10" placeholder="請輸入您的密碼" required>
+                            <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-blue-500 transition-colors">
+                                <i class="fas fa-eye"></i>
                             </button>
                         </div>
                     </div>
+                    
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="remember" name="remember" class="w-4 h-4 rounded border-gray-600 text-blue-500 focus:ring-blue-500/50 bg-gray-700">
+                            <label for="remember" class="ml-2 text-sm text-gray-400">記住我</label>
                 </div>
-            </div>
-        </section>
-        
-        <!-- AI 展示區 -->
-        <section class="section-card">
-            <h2 class="text-3xl font-serif mb-6 text-[#5349a0] inline-block pb-2 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-accent/60">AI 技術展示</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="demo-card before:absolute before:top-0 before:left-0 before:w-1 before:h-2/5 before:bg-accent/70">
-                    <h3 class="text-xl font-serif text-primary mb-2 inline-block pb-1 relative after:absolute after:bottom-0 after:left-0 after:w-8 after:h-px after:bg-accent/80">影像模擬</h3>
-                    <p>透過深度學習技術，我們可以從您提供的照片中重建逼真的3D模型，呈現出栩栩如生的影像。</p>
-                    <img src="assets/ai-image-sample.jpg" alt="AI生成的親人影像" class="w-full h-auto rounded-lg mt-4">
-                </div>
-                <div class="demo-card before:absolute before:top-0 before:left-0 before:w-1 before:h-2/5 before:bg-accent/70">
-                    <h3 class="text-xl font-serif text-primary mb-2 inline-block pb-1 relative after:absolute after:bottom-0 after:left-0 after:w-8 after:h-px after:bg-accent/80">聲音模擬</h3>
-                    <p>我們的語音合成系統可以從短短幾分鐘的錄音中，捕捉您所愛之人的獨特聲調與表達方式。</p>
-                    <div class="mt-4">
-                        <audio controls class="w-full">
-                            <source src="assets/ai-voice-sample.mp3" type="audio/mpeg">
-                            您的瀏覽器不支援音訊播放。
-                        </audio>
+                        <a href="#" class="text-sm text-blue-400 hover:text-blue-300 transition-colors">忘記密碼？</a>
                     </div>
+                    
+                    <button type="submit" class="login-btn mb-4">
+                        <span class="inline-block mr-2">登入系統</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    
+                    <div class="text-center text-sm text-gray-500">
+                        僅限授權人員訪問
+                        <div class="mt-2 text-xs">
+                            <i class="fas fa-shield-alt text-blue-500 mr-1"></i>
+                            安全連接 | <i class="fas fa-eye-slash text-blue-500 mx-1"></i> 數據加密
                 </div>
             </div>
-        </section>
-        
-        <!-- 用戶回饋 -->
-        <section class="section-card">
-            <h2 class="text-3xl font-serif mb-6 text-[#5349a0] inline-block pb-2 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-accent/60">用戶心得分享</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="demo-card before:absolute before:top-0 before:left-0 before:w-1 before:h-2/5 before:bg-accent/70">
-                    <p class="mb-4">"能夠再次聽到母親的聲音，看到她對我微笑，這種感覺無法用言語形容。感謝這項科技帶給我的安慰。"</p>
-                    <p><strong class="text-primary inline-block">— 陳小姐，台北</strong></p>
-                </div>
-                <div class="demo-card before:absolute before:top-0 before:left-0 before:w-1 before:h-2/5 before:bg-accent/70">
-                    <p class="mb-4">"父親離開已經三年了，但透過這個系統，我的孩子們仍能認識他們的爺爺，聽他講故事，這真的很神奇。"</p>
-                    <p><strong class="text-primary inline-block">— 李先生，高雄</strong></p>
-                </div>
-                <div class="demo-card before:absolute before:top-0 before:left-0 before:w-1 before:h-2/5 before:bg-accent/70">
-                    <p class="mb-4">"起初我很懷疑，但當我看到系統生成的奶奶的影像時，那熟悉的笑容和神情讓我淚如雨下，彷彿她又回來了。"</p>
-                    <p><strong class="text-primary inline-block">— 張先生，台中</strong></p>
-                </div>
+                </form>
             </div>
-        </section>
-        
-        <!-- FAQ 區塊 -->
-        <section class="section-card">
-            <h2 class="text-3xl font-serif mb-6 text-[#5349a0] inline-block pb-2 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-accent/60">常見問題</h2>
-            <div class="space-y-6">
-                <div>
-                    <h3 class="text-xl font-serif text-primary mb-2 inline-block pb-1 relative after:absolute after:bottom-0 after:left-0 after:w-8 after:h-px after:bg-accent/80">需要提供多少影像和聲音資料？</h3>
-                    <p>一般來說，15-20張不同角度的照片和5-10分鐘的清晰聲音錄音即可達到基本效果。資料越豐富，重建的效果越好。</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-serif text-primary mb-2 inline-block pb-1 relative after:absolute after:bottom-0 after:left-0 after:w-8 after:h-px after:bg-accent/80">系統如何保障我提供的個人資料安全？</h3>
-                    <p>我們採用端到端加密技術保護所有資料，並嚴格遵守隱私法規。您的資料只會用於您授權的目的，不會被用於任何商業用途或分享給第三方。</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-serif text-primary mb-2 inline-block pb-1 relative after:absolute after:bottom-0 after:left-0 after:w-8 after:h-px after:bg-accent/80">AI生成的影像和聲音有多逼真？</h3>
-                    <p>我們的系統可以達到95%以上的相似度，能夠精確還原人物的表情、動作和語調特點，讓人倍感親切與熟悉。</p>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <!-- 頁尾 -->
-    <footer class="bg-primary text-white py-8 px-4 text-center border-t border-white/20">
-        <div class="max-w-7xl mx-auto flex flex-wrap justify-between">
-            <div class="w-full md:w-1/3 p-4 mb-6 md:mb-0">
-                <h3 class="text-xl font-serif mb-4">聯絡我們</h3>
-                <p>電話：(02) 1234-5678</p>
-                <p>電子郵件：info@digitalmemory.com</p>
-                <p>地址：台北市信義區松仁路100號</p>
-            </div>
-            <div class="w-full md:w-1/3 p-4 mb-6 md:mb-0">
-                <h3 class="text-xl font-serif mb-4">服務項目</h3>
-                <p>影像重建</p>
-                <p>聲音模擬</p>
-                <p>互動式回憶空間</p>
-                <p>數位告別式規劃</p>
-            </div>
-            <div class="w-full md:w-1/3 p-4">
-                <h3 class="text-xl font-serif mb-4">關注我們</h3>
-                <div class="flex justify-center gap-4 mb-4">
-                    <a href="#" aria-label="Facebook" class="text-xl hover:text-accent transition-colors"><i class="fab fa-facebook"></i></a>
-                    <a href="#" aria-label="Instagram" class="text-xl hover:text-accent transition-colors"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="YouTube" class="text-xl hover:text-accent transition-colors"><i class="fab fa-youtube"></i></a>
-                </div>
-                <p><a href="#" class="text-white hover:text-accent transition-colors">隱私政策</a> | <a href="#" class="text-white hover:text-accent transition-colors">使用條款</a></p>
-            </div>
-        </div>
-        <div class="mt-8 pt-4 border-t border-white/10">
-            <p>&copy; 2023 未來告別式&數位永生系統 版權所有</p>
-        </div>
-    </footer>
-    
-    <script src="js/upload.js"></script>
-    <!-- 添加導覽列控制腳本 -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 控制移動裝置選單
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
             
-            mobileMenuButton.addEventListener('click', function() {
-                if (mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.remove('hidden');
-                } else {
-                    mobileMenu.classList.add('hidden');
-                }
+            <!-- 底部信息 -->
+            <div class="text-center mt-8 text-gray-500 text-sm">
+                &copy; 2023 數位永生科技 • 版權所有
+            </div>
+        </div>
+        </div>
+    
+    <script>
+        // 生成粒子背景
+        document.addEventListener('DOMContentLoaded', function() {
+            const particles = document.getElementById('particles');
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // 隨機大小
+                const size = Math.random() * 10 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // 隨機位置
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                
+                // 隨機動畫延遲
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                
+                // 隨機動畫時長
+                particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                
+                particles.appendChild(particle);
+            }
+            
+            // 密碼顯示切換
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordField = document.getElementById('password');
+            
+            togglePassword.addEventListener('click', function() {
+                const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordField.setAttribute('type', type);
+                
+                // 切換圖標
+                this.querySelector('i').classList.toggle('fa-eye');
+                this.querySelector('i').classList.toggle('fa-eye-slash');
             });
             
-            // 導覽列滾動效果
-            const nav = document.getElementById('main-nav');
-            let lastScrollTop = 0;
+            // 登入表單提交
+            const loginForm = document.getElementById('loginForm');
             
-            window.addEventListener('scroll', function() {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
                 
-                if (scrollTop > 100) {
-                    nav.classList.add('shadow-md');
-                    nav.classList.remove('py-4');
-                } else {
-                    nav.classList.remove('shadow-md');
-                }
+                // 登入按鈕狀態變化
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin mr-2"></i> 正在驗證...';
                 
-                if (scrollTop > 200) {
-                    if (scrollTop > lastScrollTop) {
-                        // 向下滾動
-                        nav.style.transform = 'translateY(-100%)';
-                    } else {
-                        // 向上滾動
-                        nav.style.transform = 'translateY(0)';
-                    }
-                } else {
-                    nav.style.transform = 'translateY(0)';
-                }
-                
-                lastScrollTop = scrollTop;
+                // 模擬登入過程
+                setTimeout(() => {
+                    // 重置按鈕
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                    
+                    // 跳轉到管理頁面
+                    window.location.href = 'admin.html';
+                }, 1500);
             });
         });
     </script>
