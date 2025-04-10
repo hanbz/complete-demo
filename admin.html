@@ -65,7 +65,8 @@
                 @apply flex items-center space-x-3 px-4 py-3 text-gray-300 rounded-md transition-all duration-200 hover:bg-admin-primary/50 hover:text-white;
             }
             .sidebar-link.active {
-                @apply bg-admin-accent text-white hover:bg-admin-accent;
+                background-color: rgba(255, 255, 255, 0.1);
+                border-left: 3px solid #3498db;
             }
             .table-header {
                 @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
@@ -96,126 +97,6 @@
             transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             will-change: left;
             z-index: 30;
-        }
-        
-        /* 優化的toggle按鈕 */
-        #toggle-sidebar {
-            position: relative;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: linear-gradient(145deg, #2c3e50, #1e293b);
-            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), 
-                        -4px -4px 8px rgba(255, 255, 255, 0.05);
-            color: #fff;
-            transition: all 0.3s ease;
-            transform: translateX(0);
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 20;
-        }
-        
-        #toggle-sidebar:hover {
-            box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.3), 
-                        -6px -6px 10px rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-            background: linear-gradient(145deg, #3498db, #2980b9);
-        }
-        
-        #toggle-sidebar:active {
-            box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.3), 
-                        inset -4px -4px 8px rgba(255, 255, 255, 0.05);
-            transform: translateY(0);
-        }
-        
-        #toggle-sidebar i {
-            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            font-size: 1rem;
-        }
-        
-        #sidebar.collapsed #toggle-sidebar {
-            transform: translateX(0) rotate(180deg);
-        }
-        
-        #sidebar.collapsed {
-            width: 64px !important;
-        }
-        
-        #sidebar.collapsed .sidebar-link {
-            justify-content: center;
-            padding: 0.75rem 0;
-        }
-        
-        #sidebar.collapsed .sidebar-link span,
-        #sidebar.collapsed .sidebar-user-info,
-        #sidebar.collapsed .text-white > div {
-            opacity: 0;
-            visibility: hidden;
-            position: absolute;
-            pointer-events: none;
-        }
-        
-        #sidebar.collapsed:hover .sidebar-link {
-            text-align: left;
-            justify-content: flex-start;
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
-        
-        #sidebar.collapsed:hover {
-            width: 240px !important;
-        }
-        
-        /* 改進的響應式設計 */
-        @media (max-width: 767px) {
-            #sidebar {
-                width: 64px !important;
-                z-index: 40;
-            }
-            
-            #sidebar .sidebar-link {
-                justify-content: center;
-                padding: 0.75rem 0;
-            }
-            
-            #sidebar .sidebar-link span,
-            #sidebar .text-white > div {
-                opacity: 0;
-                visibility: hidden;
-                position: absolute;
-                pointer-events: none;
-            }
-            
-            #sidebar:hover {
-                width: 240px !important;
-            }
-            
-            #sidebar:hover .sidebar-link {
-                text-align: left;
-                justify-content: flex-start;
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-            
-            #sidebar:hover .sidebar-link span,
-            #sidebar:hover .text-white > div {
-                opacity: 1;
-                visibility: visible;
-                position: static;
-                pointer-events: auto;
-            }
-            
-            #content {
-                margin-left: 64px !important;
-            }
-            
-            header {
-                left: 64px !important;
-                right: 0;
-                width: auto;
-            }
         }
         
         /* 數據表格動畫 */
@@ -398,6 +279,30 @@
                 word-break: break-word;
             }
         }
+        
+        /* 響應式設計 */
+        @media (max-width: 767px) {
+            #sidebar {
+                width: 240px !important;
+                z-index: 40;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            #sidebar.mobile-visible {
+                transform: translateX(0);
+            }
+            
+            #content {
+                margin-left: 0 !important;
+            }
+            
+            header {
+                left: 0 !important;
+                right: 0;
+                width: auto;
+            }
+        }
     </style>
 </head>
 <body class="bg-admin-content font-sans">
@@ -456,13 +361,6 @@
                     <i class="fas fa-sign-out-alt w-5 text-center"></i>
                     <span>返回前台</span>
                 </a>
-                
-                <!-- 改良的側邊欄切換按鈕 -->
-                <div class="mt-6 px-3 py-3 border-t border-gray-600/30 flex justify-center">
-                    <button id="toggle-sidebar" class="focus:outline-none">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                </div>
             </nav>
         </aside>
         
@@ -472,7 +370,26 @@
             <div class="binary-code"></div>
             
             <!-- 頂部導航欄 -->
-                        
+            <header class="fixed top-0 left-64 right-0 bg-admin-header h-16 shadow-md flex items-center px-6 justify-between z-10 transition-all duration-300">
+                <!-- 移動裝置菜單按鈕 -->
+                <button id="mobile-menu-toggle" class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                
+                <!-- 搜索欄 -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" placeholder="搜索日誌內容、IP 地址或操作類型..." class="pl-10 pr-4 py-2 border border-gray-200 rounded-md text-sm focus:ring-admin-accent focus:border-admin-accent w-64">
+                    </div>
+                    <button class="admin-btn admin-btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </header>
+            
             <!-- 主要內容 -->
             <main class="p-6">
                 <!-- 項目管理頁面 -->

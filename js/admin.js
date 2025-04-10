@@ -41,80 +41,45 @@ function initSidebar() {
     const sidebar = document.getElementById('sidebar');
     const content = document.getElementById('content');
     const header = document.querySelector('header');
-    const toggleBtn = document.getElementById('toggle-sidebar');
     const sidebarLinks = document.querySelectorAll('.sidebar-link');
-    const sidebarLabels = document.querySelectorAll('.sidebar-link span');
-    const sidebarUserInfo = document.querySelectorAll('.sidebar-user-info');
-    const toggleIcon = toggleBtn.querySelector('i');
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     
-    // 檢查本地存儲的側邊欄狀態
-    const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+    // 設置固定展開狀態
+    sidebar.classList.remove('collapsed');
+    content.style.marginLeft = '240px';
+    if (header) header.style.left = '240px';
     
-    // 設置初始狀態
-    if (isCollapsed) {
-        sidebar.classList.add('collapsed');
-        content.style.marginLeft = '64px';
-        if (header) header.style.left = '64px';
-    } else {
-        sidebar.classList.remove('collapsed');
-        content.style.marginLeft = '240px';
-        if (header) header.style.left = '240px';
-    }
+    // 移除localStorage中的側邊欄狀態
+    localStorage.removeItem('sidebarCollapsed');
     
-    // 檢查是否為移動設備
-    function checkScreenSize() {
-        if (window.innerWidth <= 767) {
-            // 小螢幕時自動收合側邊欄
-            if (!sidebar.classList.contains('collapsed')) {
-                sidebar.classList.add('collapsed');
-                content.style.marginLeft = '64px';
-                if (header) header.style.left = '64px';
-                localStorage.setItem('sidebarCollapsed', 'true');
-            }
-        } else {
-            // 讀取用戶儲存的偏好設置
-            const savedState = localStorage.getItem('sidebarCollapsed');
-            if (savedState !== null) {
-                const shouldBeCollapsed = savedState === 'true';
-                const isCurrentlyCollapsed = sidebar.classList.contains('collapsed');
-                
-                if (isCurrentlyCollapsed !== shouldBeCollapsed) {
-                    if (shouldBeCollapsed) {
-                        sidebar.classList.add('collapsed');
-                        content.style.marginLeft = '64px';
-                        if (header) header.style.left = '64px';
-                    } else {
-                        sidebar.classList.remove('collapsed');
-                        content.style.marginLeft = '240px';
-                        if (header) header.style.left = '240px';
-                    }
-                }
-            }
-        }
-    }
-    
-    // 初始化時檢查屏幕尺寸
-    checkScreenSize();
-    
-    // 當視窗大小變化時檢查
-    window.addEventListener('resize', checkScreenSize);
-    
-    // 切換側邊欄
-    toggleBtn.addEventListener('click', function() {
-        const isNowCollapsed = sidebar.classList.contains('collapsed');
+    // 移動裝置菜單切換
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('mobile-visible');
+        });
         
-        if (isNowCollapsed) {
-            // 展開側邊欄
-            sidebar.classList.remove('collapsed');
+        // 點擊側邊欄外部時關閉側邊欄
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 767 && 
+                !sidebar.contains(e.target) && 
+                !mobileMenuToggle.contains(e.target) && 
+                sidebar.classList.contains('mobile-visible')) {
+                sidebar.classList.remove('mobile-visible');
+            }
+        });
+    }
+    
+    // 當視窗大小變化時處理
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 767) {
+            // 在大螢幕上重置樣式
+            sidebar.classList.remove('mobile-visible');
             content.style.marginLeft = '240px';
             if (header) header.style.left = '240px';
-            localStorage.setItem('sidebarCollapsed', 'false');
         } else {
-            // 收起側邊欄
-            sidebar.classList.add('collapsed');
-            content.style.marginLeft = '64px';
-            if (header) header.style.left = '64px';
-            localStorage.setItem('sidebarCollapsed', 'true');
+            // 在小螢幕上調整樣式
+            content.style.marginLeft = '0';
+            if (header) header.style.left = '0';
         }
     });
     
@@ -126,6 +91,11 @@ function initSidebar() {
                 e.preventDefault();
                 sidebarLinks.forEach(item => item.classList.remove('active'));
                 this.classList.add('active');
+                
+                // 在移動設備上，點擊選單後自動關閉側邊欄
+                if (window.innerWidth <= 767) {
+                    sidebar.classList.remove('mobile-visible');
+                }
                 
                 // 更新頁面標題
                 const pageTitle = this.querySelector('span') ? 
@@ -139,19 +109,6 @@ function initSidebar() {
             }
         });
     });
-    
-    // 側邊欄hover效果 - 小螢幕上自動展開
-    if (window.innerWidth <= 767) {
-        sidebar.addEventListener('mouseenter', function() {
-            if (sidebar.classList.contains('collapsed')) {
-                sidebar.classList.add('hovered');
-            }
-        });
-        
-        sidebar.addEventListener('mouseleave', function() {
-            sidebar.classList.remove('hovered');
-        });
-    }
 }
 
 // 用戶選單控制
