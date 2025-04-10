@@ -414,7 +414,7 @@
                     <!-- 數據卡片區域 -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                         <div class="stats-card border-l-admin-accent">
-                            <div class="text-gray-500 mb-1 text-sm">帳戶數量</div>
+                            <div class="text-gray-500 mb-1 text-sm">專案數量</div>
                             <div class="text-2xl font-bold mb-2 flex items-baseline">
                                 50
                             </div>
@@ -773,27 +773,23 @@
                         <div class="stats-card border-l-admin-accent">
                             <div class="text-gray-500 mb-1 text-sm">總用戶數</div>
                             <div class="text-2xl font-bold mb-2 flex items-baseline">
-                                1,254
-                                <span class="ml-2 text-xs font-normal text-admin-success"><i
-                                        class="fas fa-arrow-up"></i> 12%</span>
+                                12
                             </div>
-                            <div class="text-xs text-gray-400">較上月增長 134 位用戶</div>
+                            <div class="text-xs text-gray-400">較上月增長 4 位用戶</div>
                         </div>
 
                         <div class="stats-card border-l-admin-success">
                             <div class="text-gray-500 mb-1 text-sm">活躍用戶</div>
                             <div class="text-2xl font-bold mb-2 flex items-baseline">
-                                876
-                                <span class="ml-2 text-xs font-normal text-admin-success"><i
-                                        class="fas fa-arrow-up"></i> 8%</span>
+                                6
                             </div>
-                            <div class="text-xs text-gray-400">70% 的用戶活躍使用系統</div>
+                            <div class="text-xs text-gray-400">50% 的用戶活躍使用系統</div>
                         </div>
 
                         <div class="stats-card border-l-admin-warning">
                             <div class="text-gray-500 mb-1 text-sm">待驗證帳號</div>
                             <div class="text-2xl font-bold mb-2">
-                                23
+                                3
                             </div>
                             <div class="text-xs text-gray-400">平均處理時間：1.5 小時</div>
                         </div>
@@ -801,7 +797,7 @@
                         <div class="stats-card border-l-admin-danger">
                             <div class="text-gray-500 mb-1 text-sm">異常帳號</div>
                             <div class="text-2xl font-bold mb-2">
-                                5
+                                2
                             </div>
                             <div class="text-xs text-gray-400">需要進一步檢查與處理</div>
                         </div>
@@ -826,18 +822,18 @@
                             </div>
                             <div class="grid grid-cols-2 gap-4">
                                 <div class="bg-gray-50 rounded-lg p-4">
-                                    <h4 class="text-sm text-gray-500 mb-1">平均使用時間</h4>
-                                    <div class="text-2xl font-bold text-admin-accent">38 分鐘</div>
-                                    <div class="text-xs text-gray-400 mt-1">每次登入平均使用時長</div>
+                                    <h4 class="text-sm text-gray-500 mb-1">平均影片時間</h4>
+                                    <div class="text-2xl font-bold text-admin-accent">2 分鐘</div>
+                                    <div class="text-xs text-gray-400 mt-1">所有影片平均時長</div>
                                 </div>
                                 <div class="bg-gray-50 rounded-lg p-4">
                                     <h4 class="text-sm text-gray-500 mb-1">日活躍用戶</h4>
-                                    <div class="text-2xl font-bold text-admin-success">512</div>
+                                    <div class="text-2xl font-bold text-admin-success">1</div>
                                     <div class="text-xs text-gray-400 mt-1">今日已登入的用戶數</div>
                                 </div>
                                 <div class="bg-gray-50 rounded-lg p-4">
                                     <h4 class="text-sm text-gray-500 mb-1">新增用戶</h4>
-                                    <div class="text-2xl font-bold text-admin-warning">17</div>
+                                    <div class="text-2xl font-bold text-admin-warning">0</div>
                                     <div class="text-xs text-gray-400 mt-1">過去 24 小時註冊數</div>
                                 </div>
                                 <div class="bg-gray-50 rounded-lg p-4">
@@ -3208,10 +3204,12 @@
             const userActivityChartCtx = document.getElementById('userActivityChart');
             if (!userActivityChartCtx) return;
 
-            // 生成活躍度假數據
-            const labels = ['一月', '二月', '三月', '四月', '五月', '六月', '七月'];
-            const activeUsers = [680, 720, 750, 790, 840, 900, 950];
-            const newUsers = [90, 85, 95, 120, 115, 135, 145];
+            // --- 修改圖表數據 ---
+            // TODO: 此處為假數據，實際應用應從後端 API 獲取動態數據
+            const labels = ['週一', '週二', '週三', '週四', '週五', '週六', '今日']; // 將時間標籤改為最近一周
+            const activeUsers = [5, 6, 8, 7, 9, 10, 1]; // 最後一個數據點設為 1，與 "日活躍用戶" 卡片一致
+            const newUsers = [2, 1, 3, 1, 2, 0, 0]; // 最後一個數據點設為 0，與 "新增用戶" 卡片一致
+            // --- 修改結束 ---
 
             // 創建圖表
             new Chart(userActivityChartCtx, {
