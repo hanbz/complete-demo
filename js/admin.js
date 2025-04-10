@@ -18,6 +18,22 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 初始化通知功能
     initNotifications();
+    
+    // 頁面加載時，若URL沒有hash，則默認切換到項目管理頁面
+    if (!window.location.hash) {
+        window.location.hash = 'projects';
+    }
+    // 根據URL hash切換頁面
+    const pageId = window.location.hash.replace('#', '') || 'projects';
+    switchPage(pageId);
+    // 激活對應的側邊欄項目
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+        if (link.getAttribute('href') === '#' + pageId) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
 });
 
 // 側邊欄收合功能
@@ -710,9 +726,7 @@ function switchPage(pageId) {
         targetPage.classList.remove('hidden');
         
         // 頁面特定初始化
-        if (pageId === 'dashboard') {
-            refreshDashboardData();
-        } else if (pageId === 'uploads') {
+        if (pageId === 'uploads') {
             initUploadsPage();
         } else if (pageId === 'projects') {
             initProjectsPage();
@@ -1609,9 +1623,4 @@ function showNewProjectModal() {
             showAdminToast('項目建立成功', '新項目已成功建立，系統分配中', 'success');
         }, 1500);
     });
-}
-
-// 刷新儀表板數據
-function refreshDashboardData() {
-    // ... existing code ...
 } 

@@ -430,11 +430,7 @@
             <!-- 導航選單 -->
             <nav class="mt-3 px-3">
                 <div class="text-xs text-gray-500 px-3 py-2 uppercase sidebar-user-info">主要功能</div>
-                <a href="#dashboard" class="sidebar-link active">
-                    <i class="fas fa-chart-pie w-5 text-center"></i>
-                    <span>儀表板</span>
-                </a>
-                <a href="#projects" class="sidebar-link">
+                <a href="#projects" class="sidebar-link active">
                     <i class="fas fa-folder w-5 text-center"></i>
                     <span>項目管理</span>
                 </a>
@@ -511,11 +507,16 @@
             
             <!-- 主要內容 -->
             <main class="p-6">
-                <!-- 儀表板頁面 -->
-                <div id="dashboard-page" class="block">
-                    <div class="mb-6">
-                        <h2 class="text-xl font-medium mb-2">儀表板</h2>
-                        <p class="text-gray-500">歡迎回來，管理員！以下是系統概覽。</p>
+                <!-- 項目管理頁面 -->
+                <div id="projects-page" class="block">
+                    <div class="mb-6 flex justify-between items-center">
+                        <div>
+                            <h2 class="text-xl font-medium mb-2">項目管理</h2>
+                            <p class="text-gray-500">管理和監控所有數位化處理項目。</p>
+                        </div>
+                        <button class="admin-btn admin-btn-primary shadow-md" id="new-project-btn">
+                            <i class="fas fa-plus mr-2"></i> 創建新項目
+                        </button>
                     </div>
                     
                     <!-- 數據卡片區域 -->
@@ -3485,9 +3486,7 @@ at XMLHttpRequest.onloadend (axios.js:33)</pre>
             targetPage.classList.remove('hidden');
             
             // 頁面特定初始化
-            if (pageId === 'dashboard') {
-                refreshDashboardData();
-            } else if (pageId === 'uploads') {
+            if (pageId === 'uploads') {
                 initUploadsPage();
             } else if (pageId === 'projects') {
                 initProjectsPage();
