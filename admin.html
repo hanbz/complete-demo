@@ -511,7 +511,7 @@
                 <div id="projects-page" class="block">
                     <div class="mb-6 flex justify-between items-center">
                         <div>
-                            <h2 class="text-xl font-medium mb-2">項目管理</h2>
+                            <h2 class="text-xl font-medium mb-2">個案管理</h2>
                             <p class="text-gray-500">管理和監控所有數位化處理項目。</p>
                         </div>
                         <button class="admin-btn admin-btn-primary shadow-md" id="new-project-btn">
@@ -522,68 +522,35 @@
                     <!-- 數據卡片區域 -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                         <div class="stats-card border-l-admin-accent">
-                            <div class="text-gray-500 mb-1 text-sm">總用戶數</div>
+                            <div class="text-gray-500 mb-1 text-sm">帳戶數量</div>
                             <div class="text-2xl font-bold mb-2 flex items-baseline">
-                                1,254
-                                <span class="ml-2 text-xs font-normal text-admin-success"><i class="fas fa-arrow-up"></i> 12%</span>
+                                50
                             </div>
-                            <div class="text-xs text-gray-400">較上月增長 134 位用戶</div>
+                            <div class="text-xs text-gray-400">較上個月增長8人</div>
                         </div>
                         
                         <div class="stats-card border-l-admin-success">
-                            <div class="text-gray-500 mb-1 text-sm">已處理的影片</div>
+                            <div class="text-gray-500 mb-1 text-sm">影片數量</div>
                             <div class="text-2xl font-bold mb-2 flex items-baseline">
-                                328
-                                <span class="ml-2 text-xs font-normal text-admin-success"><i class="fas fa-arrow-up"></i> 8%</span>
+                                96
                             </div>
-                            <div class="text-xs text-gray-400">本月處理了 42 個新影片</div>
+                            <div class="text-xs text-gray-400">較上個月增長20</div>
                         </div>
                         
                         <div class="stats-card border-l-admin-warning">
-                            <div class="text-gray-500 mb-1 text-sm">待處理請求</div>
+                            <div class="text-gray-500 mb-1 text-sm">待處理影片數</div>
                             <div class="text-2xl font-bold mb-2">
-                                16
+                                10
                             </div>
-                            <div class="text-xs text-gray-400">平均處理時間：3.5 小時</div>
+                            <div class="text-xs text-gray-400">目前有0支影片未指派負責人</div>
                         </div>
                         
                         <div class="stats-card border-l-admin-danger">
-                            <div class="text-gray-500 mb-1 text-sm">系統負載</div>
+                            <div class="text-gray-500 mb-1 text-sm">未完成面談戶</div>
                             <div class="text-2xl font-bold mb-2">
-                                64%
+                                0
                             </div>
-                            <div class="text-xs text-gray-400">AI 處理單元正常運行中</div>
-                        </div>
-                    </div>
-                    
-                    <!-- 圖表區域 -->
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                        <div class="admin-card lg:col-span-2 p-6">
-                            <div class="flex justify-between items-center mb-4">
-                                <h3 class="font-medium">系統使用趨勢</h3>
-                                <div class="flex items-center space-x-2">
-                                    <select id="trendsRangeSelect" class="text-sm border rounded-md px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-admin-accent">
-                                        <option>過去 7 天</option>
-                                        <option>過去 30 天</option>
-                                        <option>過去 3 個月</option>
-                                    </select>
-                                    <button class="text-gray-400 hover:text-admin-accent">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- 修改為 canvas 元素 -->
-                            <div class="h-64 rounded-lg">
-                                <canvas id="trendsChart"></canvas>
-                            </div>
-                        </div>
-                        
-                        <div class="admin-card p-6">
-                            <h3 class="font-medium mb-4">用戶分布</h3>
-                            <!-- 圓餅圖區域 -->
-                            <div class="h-64 rounded-lg">
-                                <canvas id="distributionChart"></canvas>
-                            </div>
+                            <div class="text-xs text-gray-400">目前有0位客戶尚未聯繫</div>
                         </div>
                     </div>
                     
