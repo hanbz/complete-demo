@@ -1236,41 +1236,18 @@
                         <p class="text-gray-500">在此管理所有用戶的影片上傳及處理狀態。</p>
                     </div>
 
-                    <!-- 上傳統計卡片 -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                        <div class="stats-card border-l-admin-success">
-                            <div class="text-gray-500 mb-1 text-sm">今日上傳</div>
-                            <div class="text-2xl font-bold mb-2 flex items-baseline">
-                                12
-                                <span class="ml-2 text-xs font-normal text-admin-success"><i
-                                        class="fas fa-arrow-up"></i> 8%</span>
-                            </div>
-                            <div class="text-xs text-gray-400">較昨日增加 1 個</div>
-                        </div>
-
-                        <div class="stats-card border-l-admin-warning">
-                            <div class="text-gray-500 mb-1 text-sm">排隊處理中</div>
-                            <div class="text-2xl font-bold mb-2">
-                                5
-                            </div>
-                            <div class="text-xs text-gray-400">預計 2 小時內完成</div>
-                        </div>
-
-                        <div class="stats-card border-l-admin-danger">
-                            <div class="text-gray-500 mb-1 text-sm">處理失敗</div>
-                            <div class="text-2xl font-bold mb-2">
-                                3
-                            </div>
-                            <div class="text-xs text-gray-400">需要手動介入處理</div>
-                        </div>
-                    </div>
-
                     <!-- 上傳操作區 -->
                     <div class="admin-card mb-8">
                         <div class="p-6 border-b border-gray-200">
                             <div class="flex justify-between items-center">
-                                <h3 class="font-medium">批量上傳處理</h3>
-                                <div class="flex space-x-2">
+                                <div class="flex items-center space-x-4">
+                                    <h3 class="font-medium">紀錄影片上傳</h3>
+                                    <div class="relative">
+                                        <input type="text" placeholder="輸入個案編號" class="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-admin-accent/50 focus:border-transparent" />
+                                        <label class="absolute -top-2 left-2 bg-white text-xs px-1 text-gray-500">個案編號</label>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2 items-center">
                                     <button class="admin-btn admin-btn-outline">批量處理</button>
                                     <button class="admin-btn admin-btn-primary">
                                         <i class="fas fa-cloud-upload-alt mr-1"></i> 新增上傳
