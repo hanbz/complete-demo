@@ -770,19 +770,64 @@ function initUploadsPage() {
 function simulateFileUpload(files) {
     if (!files.length) return;
     
-    // 顯示上傳中通知
-    showAdminToast('上傳中', `正在上傳 ${files.length} 個文件`, 'info');
+    // 顯示進度條
+    const progressContainer = document.getElementById('upload-progress-container-admin');
+    const progressBar = document.getElementById('progress-bar-admin');
+    const progressPercentage = document.getElementById('progress-percentage-admin');
+    const uploadStatus = document.getElementById('upload-status-admin');
+    const uploadTime = document.getElementById('upload-time-admin');
     
-    // 模擬上傳過程
-    setTimeout(() => {
-        showAdminToast('上傳完成', `成功上傳 ${files.length} 個文件，等待處理`, 'success');
+    if (progressContainer && progressBar && progressPercentage) {
+        // 重設並顯示進度條
+        progressBar.style.width = '0%';
+        progressPercentage.textContent = '0%';
+        uploadStatus.textContent = '正在上傳...';
+        progressContainer.classList.remove('hidden');
         
-        // 清空文件輸入
-        const fileInput = document.getElementById('file-input-admin');
-        if (fileInput) fileInput.value = '';
+        // 模擬上傳進度 - 10秒內完成
+        let progress = 0;
+        const totalTime = 10; // 總時間10秒
+        const interval = setInterval(() => {
+            progress += 100 / (totalTime * 10); // 10秒*10(每秒觸發10次) = 在100次更新內完成
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                uploadStatus.textContent = '上傳完成';
+                uploadTime.textContent = '完成';
+                
+                // 上傳完成後延遲隱藏進度條
+                setTimeout(() => {
+                    progressContainer.classList.add('hidden');
+                    // 清空文件輸入
+                    const fileInput = document.getElementById('file-input-admin');
+                    if (fileInput) fileInput.value = '';
+                    // 顯示完成通知
+                    showAdminToast('上傳完成', `成功上傳 ${files.length} 個文件，等待處理`, 'success');
+                }, 500);
+            } else {
+                // 更新剩餘時間
+                const remainingTime = Math.ceil((100 - progress) / 100 * totalTime);
+                uploadTime.textContent = `剩餘時間: ${remainingTime}秒`;
+                uploadStatus.textContent = '正在上傳...';
+            }
+            
+            // 更新進度條
+            progressBar.style.width = `${progress}%`;
+            progressPercentage.textContent = `${Math.round(progress)}%`;
+        }, 100); // 每0.1秒更新一次，10秒內完成
+    } else {
+        // 如果找不到進度條元素，退回到之前的通知方式
+        showAdminToast('上傳中', `正在上傳 ${files.length} 個文件`, 'info');
         
-        // 在實際應用中，這裡會添加新的行到表格
-    }, 1500);
+        // 模擬上傳過程
+        setTimeout(() => {
+            showAdminToast('上傳完成', `成功上傳 ${files.length} 個文件，等待處理`, 'success');
+            
+            // 清空文件輸入
+            const fileInput = document.getElementById('file-input-admin');
+            if (fileInput) fileInput.value = '';
+        }, 1500);
+    }
 }
 
 // 顯示管理員通知
